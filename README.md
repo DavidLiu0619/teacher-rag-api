@@ -78,7 +78,7 @@ docker container ls
 
 and stop them through 
 ```bash
-docker componse down -v
+docker compose down -v
 ```
 
 ## Architecture
