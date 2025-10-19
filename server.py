@@ -23,5 +23,5 @@ def ask():
 if __name__ == "__main__":
     # Cloud Run will set PORT; default to 5003 locally
     import os
-    port = int(os.getenv("PORT", 5003))
+    port = int(os.environ["PORT"])
     app.run(host="0.0.0.0", port=port)

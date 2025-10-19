@@ -31,9 +31,6 @@ ENV/
 *.swp
 *.swo
 
-# Chroma DB files
-chroma_db/
-
 # Environment variables
 .env
 

@@ -1,21 +1,26 @@
-# Dockerfile
+# Use Python 3.10 slim image
 FROM python:3.10-slim
 
+# Set working directory
 WORKDIR /app
 
-# Install Python deps
+# Install Python dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip \
- && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code & data
+# Copy application code and data
 COPY . .
 
-# Expose ports (Cloud Run uses $PORT, default 8080; locally 5002)
-EXPOSE 8080
-EXPOSE 5002
+# Set environment variables
+ENV PORT=5003
+ENV PYTHONUNBUFFERED=1
 
-# Launch Flask
+# Create data directory and set permissions
+RUN mkdir -p /app/chroma_db && \
+    chown -R nobody:nogroup /app/chroma_db
+
+# Use non-root user
+USER nobody
+
+# Launch server
 CMD ["python", "server.py"]
-
-
