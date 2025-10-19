@@ -1,0 +1,33 @@
+If you want to deploy Gemini API model to Google Cloud Run, do following steps:
+
+After push the image to Docker Hub, cd to your folder:
+
+First, install the gcloud CLI (select the right version) by this link: https://cloud.google.com/sdk/docs/install
+
+Second, open your Terminal run following
+
+gcloud --version 
+
+gcloud init
+
+gcloud config list account 
+
+gcloud builds submit --tag gcr.io/stats418lecture7/ucla-clubs-rag-api .
+
+gcloud run deploy ucla-clubs-rag-api \
+  --image=gcr.io/stats418lecture7/ucla-clubs-rag-api \
+  --region=us-central1 \
+  --platform=managed \
+  --allow-unauthenticated \
+  --set-env-vars="GOOGLE_API_KEY=Your API Key Here”
+
+Check your Google Cloud Run console
+
+Done!
+
+
+In your local for test, you can fill in .env with your Gemini API key by run:
+
+cat > .env <<EOF
+GOOGLE_API_KEY=your_actual_gemini_api_key_here
+EOF
