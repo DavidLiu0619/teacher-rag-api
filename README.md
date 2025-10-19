@@ -43,7 +43,14 @@ pip install -r requirements.txt
 
 3. Set up your Gemini API key:
 ```bash
-export GOOGLE_API_KEY=your_actual_gemini_api_key_here
+cat > .env <<EOF
+GOOGLE_API_KEY=your_actual_gemini_api_key_here
+EOF
+```
+
+4. Build and run with Docker:
+```bash
+docker compose up -d
 ```
 
 ## Usage
@@ -60,6 +67,18 @@ curl -H "Content-Type: application/json" -X POST -d '{"question":"What are the l
 
 # Ask about resources
 curl -H "Content-Type: application/json" -X POST -d '{"question":"What are the resources needed for Lesson 1?"}' "http://localhost:5003/ask"
+```
+
+You can change some of the values to see the prediction change. Both of the curl commands can be found in the file curl_test.sh. 
+
+Check to see if you have any docker containers running using 
+```bash
+docker container ls
+```
+
+and stop them through 
+```bash
+docker componse down -v
 ```
 
 ## Architecture
